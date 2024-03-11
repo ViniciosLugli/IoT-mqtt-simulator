@@ -1,3 +1,4 @@
+use crate::utils::dotenv;
 use mqtt::Receiver;
 use paho_mqtt as mqtt;
 use std::time::{Duration, Instant};
@@ -8,19 +9,30 @@ pub struct MqttClient {
 }
 
 impl MqttClient {
-	pub fn new(client_id: &str, broker: &str) -> Result<Self, mqtt::Error> {
-		let create_opts = mqtt::CreateOptionsBuilder::new().server_uri(broker).client_id(client_id).finalize();
+	pub fn new(client_id: &str) -> Result<Self, mqtt::Error> {
+		let broker = dotenv::get_var("BROKER").unwrap();
+		let create_opts = mqtt::CreateOptionsBuilder::new().server_uri(broker.clone()).client_id(client_id).finalize();
 
 		let client = mqtt::Client::new(create_opts)?;
-		Ok(MqttClient { client, broker: broker.to_string() })
+		Ok(MqttClient { client, broker })
 	}
 
 	pub fn connect(&mut self, keep_alive_interval: Duration, clean_session: bool) -> Result<(), mqtt::Error> {
-		let conn_opts =
-			mqtt::ConnectOptionsBuilder::new().keep_alive_interval(keep_alive_interval).clean_session(clean_session).finalize();
+		let mut ssl_opts_builder = mqtt::SslOptionsBuilder::new();
+		let ssl = ssl_opts_builder.enable_server_cert_auth(true).finalize();
 
-		self.client.connect(conn_opts).map_err(|e| e)?;
+		let mut conn_opts_builder = mqtt::ConnectOptionsBuilder::new();
+		conn_opts_builder.keep_alive_interval(keep_alive_interval).clean_session(clean_session).ssl_options(ssl);
+
+		if let (Ok(username), Ok(password)) = (dotenv::get_var("BROKER_USERNAME"), dotenv::get_var("BROKER_PASSWORD")) {
+			conn_opts_builder.user_name(username).password(password);
+		}
+
+		let conn_opts = conn_opts_builder.finalize();
+
+		self.client.connect(conn_opts)?;
 		println!("Connected to the broker at {}", self.broker);
+
 		Ok(())
 	}
 
@@ -90,17 +102,13 @@ impl MqttClient {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::utils::dotenv;
 	use rand;
 	use std::{error::Error, sync::Arc, thread, time::Duration};
 	const CLIENT_ID: &str = "test_mqtt_client";
 	const MESSAGE_RATE: u64 = 10;
 
 	fn setup_mqtt_client() -> Result<MqttClient, Box<dyn Error>> {
-		let mut client = MqttClient::new(
-			format!("{}-{}", CLIENT_ID, rand::random::<u16>()).as_str(),
-			dotenv::get_var("BROKER").unwrap().as_str(),
-		)?;
+		let mut client = MqttClient::new(format!("{}-{}", CLIENT_ID, rand::random::<u16>()).as_str())?;
 		client.connect(Duration::from_secs(60), true)?;
 		Ok(client)
 	}

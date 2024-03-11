@@ -1,11 +1,11 @@
 mod sensor;
-use common::{mqtt::MqttClient, utils::dotenv};
+use common::mqtt::MqttClient;
 use sensor::{Sensor, SPS30};
 use std::{error::Error, time::Duration};
 
 fn main() -> Result<(), Box<dyn Error>> {
-	let mut mqtt_client = MqttClient::new("SPS30_PUBLISHER", dotenv::get_var("BROKER").unwrap().as_str())?;
-	mqtt_client.connect(Duration::from_secs(60), true).unwrap();
+	let mut mqtt_client = MqttClient::new("SPS30_PUBLISHER")?;
+	mqtt_client.connect(Duration::from_secs(60), true)?;
 
 	let mut sensor = SPS30::new();
 
