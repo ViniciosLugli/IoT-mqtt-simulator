@@ -1,12 +1,6 @@
 use mqtt::Receiver;
 use paho_mqtt as mqtt;
-use std::{
-	collections::VecDeque,
-	error::Error,
-	sync::{Arc, Mutex},
-	thread,
-	time::{Duration, Instant},
-};
+use std::time::{Duration, Instant};
 
 pub struct MqttClient {
 	client: mqtt::Client,
@@ -97,7 +91,7 @@ impl MqttClient {
 mod tests {
 	use super::*;
 	use crate::utils::dotenv;
-	use std::{error::Error, thread, time::Duration};
+	use std::{error::Error, sync::Arc, thread, time::Duration};
 
 	const CLIENT_ID: &str = "test_mqtt_client";
 	const MESSAGE_RATE: u64 = 10;
