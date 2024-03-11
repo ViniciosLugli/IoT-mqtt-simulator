@@ -62,7 +62,7 @@ cargo run
 
 ## Demo
 
-https://github.com/ViniciosLugli/IoT-mqtt-simulator/assets/40807526/1e941d84-09a3-4242-b98d-eb67460fc3ce
+https://github.com/ViniciosLugli/IoT-mqtt-simulator/assets/40807526/fd442ce6-4d0c-4638-9740-9f6c64cf525d
 
 ## License
 
