@@ -47,7 +47,7 @@ mod tests {
 
 		let mut mqtt_client = MqttClient::new(client_id, broker)?;
 		mqtt_client.connect(keep_alive, true)?;
-		mqtt_client.publish(topic, payload, 2)?; // Example QoS value
+		mqtt_client.publish(topic, payload, 1)?;
 		mqtt_client.disconnect()?;
 		Ok(())
 	}
