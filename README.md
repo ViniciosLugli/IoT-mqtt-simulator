@@ -56,8 +56,24 @@ mosquitto -p 1891
 
 Compile and run the project, you can add the `--release` flag to compile the project with optimizations.
 
+#### Run the publisher
+
 ```bash
-cargo run
+cargo run --bin publisher
+```
+
+#### Run the subscriber
+
+```bash
+cargo run --bin subscriber
+```
+
+### Run the tests
+
+To run the tests, you need to have the broker of the environment variable running.
+
+```bash
+cargo test
 ```
 
 ## Demo
