@@ -155,6 +155,7 @@ mod tests {
 		client.publish(topic, "Test message", 0)?;
 		let received_message = client.wait_for_message(Duration::from_secs(1));
 		assert!(received_message.is_some());
+		assert_eq!(received_message.unwrap(), "Test message");
 
 		client.unsubscribe(topic)?;
 		client.disconnect()?;
