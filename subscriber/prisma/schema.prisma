@@ -1,0 +1,17 @@
+generator client {
+    provider = "cargo run --bin prisma -- "
+    output   = "../src/models.rs"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model SensorReading {
+    id        Int      @id @default(autoincrement())
+    name      String
+    value     Float
+    unit      String
+    createdAt DateTime @default(now())
+}
