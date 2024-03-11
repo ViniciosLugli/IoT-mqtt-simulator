@@ -6,6 +6,6 @@ authors = ["Vinicios Lugli <vinicioslugli@gmail.com>"]
 
 [dependencies]
 
-paho-mqtt = "0.12.3"
+paho-mqtt = { version = "0.12.3", features = ["vendored-ssl"] }
 dotenvy = "0.15.7"
 rand = "0.8.5"

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+    postgres:
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+        ports:
+            - '5432:5432'
+        volumes:
+            - '.cache/postgres:/var/lib/postgresql/data'
+
+    metabase:
+        image: metabase/metabase:latest
+        ports:
+            - '3000:3000'
+        depends_on:
+            - 'postgres'
+        volumes:
+            - '.cache/metabase:/metabase.db'
+
+    publisher:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: cargo run --bin publisher
+        volumes:
+            - .:/usr/src/workspace
+        depends_on:
+            - 'postgres'
+
+    subscriber:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: cargo run --bin subscriber
+        volumes:
+            - .:/usr/src/workspace
+        depends_on:
+            - 'postgres'
+
+volumes:
+    postgres_data:

@@ -4,6 +4,7 @@ cargo.lock
 Cargo.lock
 **/*.rs.bk
 *.pdb
+.cache
 .cargo
 rustfmt.toml
 
