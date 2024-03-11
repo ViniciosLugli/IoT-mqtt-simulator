@@ -8,3 +8,4 @@ authors = ["Vinicios Lugli <vinicioslugli@gmail.com>"]
 
 paho-mqtt = "0.12.3"
 dotenvy = "0.15.7"
+rand = "0.8.5"

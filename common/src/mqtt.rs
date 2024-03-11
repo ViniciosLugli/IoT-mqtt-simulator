@@ -91,13 +91,16 @@ impl MqttClient {
 mod tests {
 	use super::*;
 	use crate::utils::dotenv;
+	use rand;
 	use std::{error::Error, sync::Arc, thread, time::Duration};
-
 	const CLIENT_ID: &str = "test_mqtt_client";
 	const MESSAGE_RATE: u64 = 10;
 
 	fn setup_mqtt_client() -> Result<MqttClient, Box<dyn Error>> {
-		let mut client = MqttClient::new(CLIENT_ID, dotenv::get_var("BROKER").unwrap().as_str())?;
+		let mut client = MqttClient::new(
+			format!("{}-{}", CLIENT_ID, rand::random::<u16>()).as_str(),
+			dotenv::get_var("BROKER").unwrap().as_str(),
+		)?;
 		client.connect(Duration::from_secs(60), true)?;
 		Ok(client)
 	}
