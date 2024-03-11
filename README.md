@@ -76,6 +76,11 @@ To run the tests, you need to have the broker of the environment variable runnin
 cargo test
 ```
 
+The test sources are located in the directory of the files they are testing:
+
+-   [MQTT](common/src/mqtt.rs#L90)
+-   [Sensor](publisher/src/sensor.rs#L45)
+
 ## Demo
 
 https://github.com/ViniciosLugli/IoT-mqtt-simulator/assets/40807526/fd442ce6-4d0c-4638-9740-9f6c64cf525d
