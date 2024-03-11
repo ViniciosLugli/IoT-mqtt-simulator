@@ -83,7 +83,7 @@ The test sources are located in the directory of the files they are testing:
 
 ## Demo
 
-https://github.com/ViniciosLugli/IoT-mqtt-simulator/assets/40807526/fd442ce6-4d0c-4638-9740-9f6c64cf525d
+https://github.com/ViniciosLugli/IoT-mqtt-simulator/assets/40807526/0fd18f63-58da-465b-9467-d45d8c9876e2
 
 ## License
 
