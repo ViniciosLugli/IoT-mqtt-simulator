@@ -62,6 +62,8 @@ cargo run
 
 ## Demo
 
+https://github.com/ViniciosLugli/IoT-mqtt-simulator/assets/40807526/1e941d84-09a3-4242-b98d-eb67460fc3ce
+
 ## License
 
 This project is protected under the [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/) License.
