@@ -21,8 +21,7 @@ A simple IoT simulator that uses MQTT protocol to send and receive messages from
 
 ### Prerequisites
 
--   [Rust](https://www.rust-lang.org/tools/install)
--   [Mosquitto](https://mosquitto.org/download/) (optional, to run a local broker)
+-   [Docker](https://www.docker.com/)
 
 ### Setup environment
 
@@ -38,39 +37,24 @@ git clone git@github.com:ViniciosLugli/IoT-mqtt-simulator.git
 cd IoT-mqtt-simulator
 ```
 
-3. Create a `.env` file in the root directory and add the following default environment variables to local connection, or change the values to connect to a remote broker.
+3. Create a `.env` file in the root directory and add the following default environment variables to local connection, or change the values to connect to a remote.
 
 ```shell
 BROKER = "mqtt://localhost:1891"
-```
-
-### Setup local broker (optional)
-
-Start the mosquitto broker
-
-```bash
-mosquitto -p 1891
+DATABASE_URL="postgresql://postgres:postgres@postgres:5432/postgres?schema=public"
 ```
 
 ### Run the project
 
-Compile and run the project, you can add the `--release` flag to compile the project with optimizations.
-
-#### Run the publisher
+Compile and run the project, you only need to run the docker environment, and all the services will be up and running.
 
 ```bash
-cargo run --bin publisher
-```
-
-#### Run the subscriber
-
-```bash
-cargo run --bin subscriber
+docker compose up
 ```
 
 ### Run the tests
 
-To run the tests, you need to have the broker of the environment variable running.
+To run the tests, you need to have the broker of the environment variable running and [rust](https://www.rust-lang.org/) installed. Just go to the root directory and run the following command:
 
 ```bash
 cargo test
@@ -78,12 +62,10 @@ cargo test
 
 The test sources are located in the directory of the files they are testing:
 
--   [MQTT](common/src/mqtt.rs#L90)
+-   [MQTT](common/src/mqtt.rs#L102)
 -   [Sensor](publisher/src/sensor.rs#L45)
 
 ## Demo
-
-https://github.com/ViniciosLugli/IoT-mqtt-simulator/assets/40807526/0fd18f63-58da-465b-9467-d45d8c9876e2
 
 ## License
 
