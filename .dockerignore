@@ -4,3 +4,4 @@ Cargo.lock
 .censitive
 rustfmt.toml
 .cache
+node_modules

@@ -1,1 +1,1 @@
-.env:.*_PASSWORD
+.env:.*_PASSWORD,,.*_URL
