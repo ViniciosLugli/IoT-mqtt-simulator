@@ -25,7 +25,6 @@ pub struct Database {
 }
 
 impl Database {
-	// As funções permanecem as mesmas, mas agora utilizam a instância concreta.
 	pub async fn new() -> Result<Self, Box<dyn Error>> {
 		let client = PrismaClient::_builder().build().await.unwrap();
 
@@ -35,5 +34,25 @@ impl Database {
 	pub async fn add_sensor_reading(&self, data: SensorData) -> Result<(), Box<dyn Error>> {
 		self.client.sensor_reading().create(data.sensor, data.unit, data.value, vec![]).exec().await.unwrap();
 		Ok(())
+	}
+}
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+
+	#[tokio::test]
+	async fn test_integrity() {
+		let db = Database::new().await.expect("Failed to create database client");
+		let test_message = r#"{"sensor":"SPS30","value":42.0,"unit":"μg/m³"}"#;
+
+		db.add_sensor_reading(serde_json::from_str(test_message).unwrap()).await.expect("Failed to add sensor reading");
+
+		let sensor_readings = db.client.sensor_reading().find_many(vec![]).exec().await.expect("Failed to fetch sensor readings");
+
+		assert_eq!(sensor_readings.len(), 1);
+		assert_eq!(sensor_readings[0].name, "SPS30");
+		assert_eq!(sensor_readings[0].value, 42.0);
+		assert_eq!(sensor_readings[0].unit, "μg/m³");
 	}
 }

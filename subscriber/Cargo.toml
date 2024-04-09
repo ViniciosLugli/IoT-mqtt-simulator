@@ -12,3 +12,5 @@ serde = "1.0.197"
 prisma-client-rust = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.11" }
 prisma-client-rust-cli = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.11" }
 tokio = "1.36.0"
+rdkafka = { version = "0.36.2", features = ["cmake-build", "gssapi"] }
+futures-util = "0.3.30"
