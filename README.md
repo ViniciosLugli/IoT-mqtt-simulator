@@ -11,11 +11,12 @@
 	<img src="https://img.shields.io/github/license/ViniciosLugli/IoT-mqtt-simulator?style=default&logo=opensourceinitiative&logoColor=white&color=78DCE8" alt="license">
 	<img src="https://img.shields.io/github/languages/top/ViniciosLugli/IoT-mqtt-simulator?style=default&color=78DCE8" alt="repo-top-language">
 </p>
+
 ---
 
 ## Overview
 
-A simple IoT simulator that uses MQTT protocol to send and receive messages from a broker. The simulator is capable of simulating the SPS30 sensor, which measures the concentration of particles in the air.
+A simple IoT simulator that uses MQTT protocol to send and receive messages from a broker. The simulator is capable of simulating the SPS30 sensor, which measures the concentration of particles in the air. The project use the [MongoDB](https://www.mongodb.com/) database to store the data and [Kafka](https://kafka.apache.org/) with [HiveMQ](https://www.hivemq.com/) integration to send the data to the broker.
 
 ## Getting Started
 
@@ -37,14 +38,7 @@ git clone git@github.com:ViniciosLugli/IoT-mqtt-simulator.git
 cd IoT-mqtt-simulator
 ```
 
-3. Create a `.env` file in the root directory and add the following default environment variables to local connection, or change the values to connect to a remote.
-
-```shell
-BROKER = "YOUR_BROKER_URL
-BROKER_USERNAME = "YOUR_BROKER_USERNAME"
-BROKER_PASSWORD = "YOUR_BROKER_PASSWORD"
-DATABASE_URL="YOUR_MONDODB_URL"
-```
+3. Copy the `.env.template` file to `.env` and fill in the environment variables
 
 ### Run the project
 
@@ -66,6 +60,8 @@ The test sources are located in the directory of the files they are testing:
 
 -   [MQTT](common/src/mqtt.rs#L102)
 -   [Sensor](publisher/src/sensor.rs#L45)
+-   [Database](subscriber/src/database.rs#L40)
+-   [Kafka](subscriber/src/kafka.rs#L83)
 
 ## Demo
 
