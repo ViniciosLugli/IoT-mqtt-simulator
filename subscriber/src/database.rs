@@ -33,7 +33,7 @@ impl Database {
 	}
 
 	pub async fn add_sensor_reading(&self, data: SensorData) -> Result<(), Box<dyn Error>> {
-		self.client.sensor_reading().create(data.sensor, data.value, data.unit, vec![]).exec().await.unwrap();
+		self.client.sensor_reading().create(data.sensor, data.unit, data.value, vec![]).exec().await.unwrap();
 		Ok(())
 	}
 }

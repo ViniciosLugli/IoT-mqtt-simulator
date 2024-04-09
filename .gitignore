@@ -11,3 +11,4 @@ rustfmt.toml
 # Env files
 .vscode
 .env
+subscriber/src/models.rs

@@ -4,14 +4,14 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
+    provider = "mongodb"
     url      = env("DATABASE_URL")
 }
 
 model SensorReading {
-    id        Int      @id @default(autoincrement())
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    createdAt DateTime @default(now()) @db.Date
     name      String
-    value     Float
     unit      String
-    createdAt DateTime @default(now())
+    value     Float
 }

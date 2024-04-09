@@ -10,7 +10,7 @@
 <p align="center">
 	<img src="https://img.shields.io/github/license/ViniciosLugli/IoT-mqtt-simulator?style=default&logo=opensourceinitiative&logoColor=white&color=78DCE8" alt="license">
 	<img src="https://img.shields.io/github/languages/top/ViniciosLugli/IoT-mqtt-simulator?style=default&color=78DCE8" alt="repo-top-language">
-
+</p>
 ---
 
 ## Overview
@@ -40,8 +40,10 @@ cd IoT-mqtt-simulator
 3. Create a `.env` file in the root directory and add the following default environment variables to local connection, or change the values to connect to a remote.
 
 ```shell
-BROKER = "mqtt://localhost:1891"
-DATABASE_URL="postgresql://postgres:postgres@postgres:5432/postgres?schema=public"
+BROKER = "YOUR_BROKER_URL
+BROKER_USERNAME = "YOUR_BROKER_USERNAME"
+BROKER_PASSWORD = "YOUR_BROKER_PASSWORD"
+DATABASE_URL="YOUR_MONDODB_URL"
 ```
 
 ### Run the project
