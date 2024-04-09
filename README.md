@@ -65,7 +65,7 @@ The test sources are located in the directory of the files they are testing:
 
 ## Demo
 
-https://github.com/ViniciosLugli/IoT-mqtt-simulator/assets/40807526/0a3835fd-fde8-44c2-9c06-46a6ab0d18a2
+https://github.com/ViniciosLugli/IoT-mqtt-simulator/assets/40807526/50032af2-f6a0-4ebf-a3c0-029bb58a57bc
 
 ## License
 
